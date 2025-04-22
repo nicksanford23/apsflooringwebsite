@@ -11,8 +11,37 @@ import { getLocalBusinessSchema } from "@/lib/seo";
 import { servicesData } from "@/data/services";
 
 const HomePage = () => {
-  // High-quality image of a luxury wood floor with natural light
-  const heroImage = "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80";
+  // Slides for the hero section
+  const heroSlides = [
+    {
+      image: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80",
+      title: "Premium Hardwood Flooring",
+      subtitle: "Timeless elegance and warmth that adds character and value to your home.",
+      ctaLink: "/services/hardwood",
+      type: "Hardwood"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1594293115120-424642241445?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80",
+      title: "Luxury Vinyl Plank",
+      subtitle: "Water-resistant, durable, and stunning replicas of natural materials.",
+      ctaLink: "/services/vinyl-plank",
+      type: "Vinyl"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1609992556706-14a7056ea745?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80",
+      title: "Porcelain & Ceramic Tile",
+      subtitle: "Elegant, easy-to-maintain tile flooring for kitchens, bathrooms, and more.",
+      ctaLink: "/services/tile-stone",
+      type: "Tile"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1616142578948-5ec3fe4d26b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80",
+      title: "Floor Refinishing",
+      subtitle: "Restore the beauty of your existing hardwood floors with our expert refinishing service.",
+      ctaLink: "/services/refinishing",
+      type: "Refinishing"
+    }
+  ];
   
   return (
     <>
@@ -25,10 +54,7 @@ const HomePage = () => {
       />
       
       <HeroSection
-        backgroundImage={heroImage}
-        title="Premium Flooring Solutions"
-        highlight="For Every Home"
-        subtitle={`From classic hardwood to modern tile & luxury vinyl plank, APS Flooring brings exceptional craftsmanship to ${CITY} and New Orleans.`}
+        slides={heroSlides}
         primaryCta={{ text: "Explore Services", href: "/services" }}
         secondaryCta={{ text: "Get Free Quote", href: "/contact" }}
       />
