@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base colors */
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    
+    /* APS Flooring specific colors */
+    --primary: 43 80% 52%; /* Gold: #D4AF37 */
+    --primary-light: 47 85% 79%; /* Light Gold: #F5E7A0 */
+    --primary-dark: 43 85% 38%; /* Dark Gold: #B8860B */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 0 0% 9%; /* Dark: #171717 */
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 0 0% 96%; /* Light Gray: #F5F5F5 */
+    --accent-foreground: 0 0% 9%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --ring: 43 80% 52%;
+    --radius: 0.25rem; /* Rounded-sm */
+  }
+  
+  .dark {
+    --background: 0 0% 7%; /* #121212 */
+    --foreground: 0 0% 98%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 70%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --primary: 43 80% 52%; /* Gold maintained */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 23%; /* #3A3A3A */
+    --secondary-foreground: 0 0% 98%;
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --ring: 43 80% 52%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair font-bold;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section-padding {
+    @apply py-12 md:py-20;
+  }
+  
+  /* Gold gradient for backgrounds */
+  .gold-gradient {
+    @apply bg-gradient-to-r from-primary/90 to-primary-dark/90;
+  }
+  
+  /* Button Styles */
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark transition-colors duration-300 px-6 py-3 rounded-sm font-medium;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent border-2 border-white text-white hover:border-primary hover:text-primary transition-colors duration-300 px-6 py-3 rounded-sm font-medium;
+  }
+  
+  .btn-dark {
+    @apply bg-secondary text-white hover:bg-secondary/90 transition-colors duration-300 px-6 py-3 rounded-sm font-medium;
+  }
+  
+  /* Feature Cards */
+  .feature-card {
+    @apply bg-white p-8 rounded-sm shadow-md hover:shadow-lg transition-all duration-300 border-t-4 border-primary transform hover:-translate-y-1;
+  }
+  
+  .feature-icon {
+    @apply w-16 h-16 mx-auto mb-6 bg-primary/10 flex items-center justify-center rounded-full text-primary;
+  }
+  
+  /* Service Card */
+  .service-card {
+    @apply relative overflow-hidden rounded-sm shadow-md hover:shadow-xl transition-all duration-300;
+  }
+  
+  .service-card-content {
+    @apply absolute inset-0 flex flex-col justify-end p-8 z-20;
+  }
+  
+  .service-card-overlay {
+    @apply absolute inset-0 bg-secondary/50 group-hover:bg-secondary/30 transition-all duration-300 z-10;
+  }
+  
+  .service-card-img {
+    @apply w-full h-80 object-cover transition duration-300 group-hover:scale-105;
+  }
+  
+  /* Review Cards */
+  .review-card {
+    @apply bg-white p-8 rounded-sm shadow-md transition duration-300 hover:shadow-lg;
+  }
+}
+
+/* FontAwesome Icons Compatibility */
+.fas, .fab, .far {
+  @apply inline-block;
+}
