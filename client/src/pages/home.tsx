@@ -9,6 +9,7 @@ import CTASection from "@/components/sections/cta-section";
 import LocationSection from "@/components/sections/location-section";
 import { getLocalBusinessSchema } from "@/lib/seo";
 import { servicesData } from "@/data/services";
+import { galleryImages } from "@/data/gallery";
 
 const HomePage = () => {
   // High-quality image of a luxury wood floor with natural light

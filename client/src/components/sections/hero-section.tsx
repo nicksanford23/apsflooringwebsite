@@ -1,10 +1,20 @@
+
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowDown, CheckCircle } from "lucide-react";
 import { cn, smoothScrollTo } from "@/lib/utils";
 import { COMPANY_INFO, CITY } from "@/lib/constants";
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from "@/components/ui/carousel";
+import { galleryImages } from "@/data/gallery";
 
 interface HeroSectionProps {
-  backgroundImage: string;
+  backgroundImage?: string;
   videoUrl?: string;
   title: string;
   highlight?: string;
@@ -22,8 +32,6 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({
-  backgroundImage,
-  videoUrl,
   title,
   highlight,
   subtitle,
@@ -32,36 +40,77 @@ const HeroSection = ({
   showRating = true,
   className
 }: HeroSectionProps) => {
+  // Get featured images for the slideshow
+  const featuredImages = galleryImages.filter(img => img.featured).slice(0, 5);
+  const [activeSlide, setActiveSlide] = useState(0);
+  
+  // Auto-advance slides
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % featuredImages.length);
+    }, 5000);
+    
+    return () => clearInterval(timer);
+  }, [featuredImages.length]);
+
   return (
     <section className={cn("relative h-[90vh] md:h-[85vh] w-full overflow-hidden bg-secondary", className)}>
-      {/* Split Design */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/90 via-black/70 to-black/30"></div>
-      
-      {/* Background Video with Fallback Image */}
-      {videoUrl ? (
-        <>
-          <video 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-            className="object-cover h-full w-full absolute inset-0"
-          >
-            <source src={videoUrl} type="video/webm" />
-            <img 
-              src={backgroundImage} 
-              alt="Luxury flooring installation" 
-              className="object-cover h-full w-full absolute inset-0"
+      {/* Image Carousel */}
+      <Carousel className="absolute inset-0 h-full w-full" 
+        setApi={(api) => {
+          api?.on("select", () => {
+            setActiveSlide(api.selectedScrollSnap());
+          });
+          // Initially set to active slide
+          api?.scrollTo(activeSlide);
+        }}
+      >
+        <CarouselContent className="h-full">
+          {featuredImages.map((image, index) => (
+            <CarouselItem key={image.id} className="h-full">
+              <div className="relative h-full w-full">
+                <img 
+                  src={image.src} 
+                  alt={image.alt} 
+                  className="object-cover h-full w-full absolute inset-0"
+                />
+                {/* Optional before/after transition for refinishing images */}
+                {image.beforeImage && (
+                  <div className="absolute bottom-4 right-4 bg-black/70 text-white text-sm px-3 py-1 rounded-sm">
+                    Before & After
+                  </div>
+                )}
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        
+        {/* Custom carousel controls */}
+        <div className="absolute bottom-10 right-10 z-30 flex gap-2">
+          <CarouselPrevious className="relative h-10 w-10 border-primary text-primary hover:bg-primary hover:text-white" />
+          <CarouselNext className="relative h-10 w-10 border-primary text-primary hover:bg-primary hover:text-white" />
+        </div>
+        
+        {/* Slide indicators */}
+        <div className="absolute bottom-10 left-10 z-30 flex gap-2">
+          {featuredImages.map((_, index) => (
+            <button
+              key={index}
+              className={cn(
+                "w-3 h-3 rounded-full transition-all",
+                activeSlide === index ? "bg-primary w-10" : "bg-white/70 hover:bg-white"
+              )}
+              onClick={() => {
+                setActiveSlide(index);
+              }}
+              aria-label={`Go to slide ${index + 1}`}
             />
-          </video>
-        </>
-      ) : (
-        <img 
-          src={backgroundImage} 
-          alt="Luxury flooring installation" 
-          className="object-cover h-full w-full absolute inset-0"
-        />
-      )}
+          ))}
+        </div>
+      </Carousel>
+      
+      {/* Overlay Gradient */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/90 via-black/70 to-black/30"></div>
       
       {/* Content */}
       <div className="relative z-20 container-custom h-full flex flex-col justify-center">
