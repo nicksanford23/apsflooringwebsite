@@ -5,32 +5,32 @@ import type { Review } from "@shared/schema";
 export const sampleReviews: Review[] = [
   {
     id: 1,
-    name: "Michael T.",
+    name: "Tammy N.",
     location: "New Orleans, LA",
     rating: 5,
-    text: "The team at APS Flooring transformed our home with beautiful hardwood floors. Their attention to detail and craftsmanship exceeded our expectations!",
-    service: "hardwood",
-    date: new Date("2023-04-15"),
+    text: "They did such a great job! They were very responsive and accommodating on start date. Came on time and were very quick and professional. Did an excellent job on both the tile and vinyl floor installations. Finished in 2 days.",
+    service: "tile-stone",
+    date: new Date("2023-12-15"),
     featured: true
   },
   {
     id: 2,
-    name: "Jennifer L.",
+    name: "Dylon B.",
     location: "Chalmette, LA",
     rating: 5,
-    text: "We couldn't be happier with our new luxury vinyl plank floors. The team was professional, efficient, and the quality of work is outstanding. Highly recommended!",
-    service: "vinyl-plank",
-    date: new Date("2023-03-22"),
+    text: "Completely blown away. These guys are the real deal. Completely tore down two bad shower tile jobs I got done last year, and gave us the showers we always wanted. Great communication, very skilled workers, and very quick but not rushed. I recommend this company to anyone wanting a great job done.",
+    service: "tile-stone",
+    date: new Date("2024-01-22"),
     featured: true
   },
   {
     id: 3,
-    name: "Robert W.",
+    name: "Michael R.",
     location: "Metairie, LA",
     rating: 5,
-    text: "APS refinished our old hardwood floors and they look brand new! Great communication throughout the process and they finished on time. Will use them again for our kitchen.",
-    service: "refinishing",
-    date: new Date("2023-05-10"),
+    text: "I think we are all in the same boat when you want a contractor to be honest and timely, but we all want to get the best price. When you're trying to do remodeling or upgrades on a budget, it could turn out great or you could find yourself contacting the local news about a nightmare story. Pereira Flooring does good business and clearly is very competent and experienced.",
+    service: "hardwood",
+    date: new Date("2024-02-10"),
     featured: true
   },
   {
@@ -40,7 +40,7 @@ export const sampleReviews: Review[] = [
     rating: 5,
     text: "Excellent tile work in our bathroom! The team was knowledgeable, professional, and completed the job on schedule. The attention to detail was impressive.",
     service: "tile-stone",
-    date: new Date("2023-02-28"),
+    date: new Date("2023-11-28"),
     featured: false
   },
   {
@@ -50,7 +50,7 @@ export const sampleReviews: Review[] = [
     rating: 5,
     text: "APS Flooring installed hardwood throughout our first floor and the results are stunning. They were a pleasure to work with from start to finish.",
     service: "hardwood",
-    date: new Date("2023-01-15"),
+    date: new Date("2023-10-15"),
     featured: false
   },
   {
@@ -60,7 +60,7 @@ export const sampleReviews: Review[] = [
     rating: 5,
     text: "The vinyl plank flooring APS installed in our rental property looks amazing and is incredibly durable. Exactly what we needed!",
     service: "vinyl-plank",
-    date: new Date("2023-04-05"),
+    date: new Date("2024-01-05"),
     featured: false
   },
   {
@@ -70,7 +70,7 @@ export const sampleReviews: Review[] = [
     rating: 5,
     text: "Professional, punctual, and precise. Our tile floors came out better than we imagined. We'll definitely be calling APS for our next project.",
     service: "tile-stone",
-    date: new Date("2023-05-20"),
+    date: new Date("2023-12-20"),
     featured: false
   },
   {
@@ -80,7 +80,7 @@ export const sampleReviews: Review[] = [
     rating: 5,
     text: "Our refinished floors look brand new! APS was able to match the existing stain perfectly where we had to replace a few damaged boards. You can't tell the difference at all.",
     service: "refinishing",
-    date: new Date("2023-03-12"),
+    date: new Date("2023-11-12"),
     featured: false
   }
 ];

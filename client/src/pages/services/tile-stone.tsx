@@ -7,7 +7,7 @@ const TileStoneServicePage = () => {
     title: "Tile & Stone Flooring",
     description: "Custom tile and stone flooring installation for kitchens, bathrooms, and other areas of your home.",
     metaDescription: "Professional tile and stone flooring installation in Chalmette and New Orleans. Porcelain, ceramic, natural stone, and more. Get a free estimate from APS Flooring.",
-    heroImage: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    heroImage: "https://lh3.googleusercontent.com/p/AF1QipNOuphZNPg9Gd5ykPucA-JEJt51XKQ8IAZgvChP=s680-w680-h510",
     problem: "Tile and stone installation requires precision and expertise. Improper installation can lead to loose tiles, uneven surfaces, and moisture problems. DIY attempts often result in costly mistakes and future repairs.",
     solution: "Our certified tile installers provide meticulous installation of various tile and stone materials. We handle everything from precise cutting and layout to proper substrate preparation and waterproofing for a beautiful, lasting result.",
     bulletPoints: [

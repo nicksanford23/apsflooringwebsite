@@ -5,13 +5,13 @@ export const galleryImages: GalleryImage[] = [
   {
     id: 1,
     title: "Modern Oak Hardwood Installation",
-    src: "https://images.unsplash.com/photo-1633116536735-0a99af6922ed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80",
-    alt: "White oak hardwood flooring in modern living room",
+    src: "https://lh3.googleusercontent.com/p/AF1QipP_pbTNVJ1CECiLfi6ZVqTcQdHmNGbimizdYW9M=s680-w680-h510",
+    alt: "White oak hardwood flooring installation by APS Flooring",
     category: "hardwood",
     serviceSlug: "hardwood",
     featured: true,
-    width: 1920,
-    height: 1080
+    width: 680,
+    height: 510
   },
   {
     id: 2,
@@ -72,14 +72,14 @@ export const galleryImages: GalleryImage[] = [
   // Vinyl Plank Images
   {
     id: 7,
-    title: "Waterproof Vinyl Plank Kitchen Floor",
-    src: "https://images.unsplash.com/photo-1571993142257-eae0b44cf0f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    alt: "Luxury vinyl plank flooring in modern kitchen",
+    title: "Waterproof Vinyl Plank Installation",
+    src: "https://lh3.googleusercontent.com/p/AF1QipOOFhtKGkNRATODlPp8i1IFDFEY0CHlhBdqT3lJ=s680-w680-h510",
+    alt: "Luxury vinyl plank flooring installation by APS Flooring",
     category: "vinyl-plank",
     serviceSlug: "vinyl-plank",
     featured: true,
-    width: 800,
-    height: 600
+    width: 680,
+    height: 510
   },
   {
     id: 8,
@@ -140,14 +140,14 @@ export const galleryImages: GalleryImage[] = [
   // Tile & Stone Images
   {
     id: 13,
-    title: "Large Format Porcelain Tile",
-    src: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    alt: "Large format porcelain tile in modern bathroom",
+    title: "Premium Tile Installation",
+    src: "https://lh3.googleusercontent.com/p/AF1QipNOuphZNPg9Gd5ykPucA-JEJt51XKQ8IAZgvChP=s680-w680-h510",
+    alt: "Professional tile installation by APS Flooring",
     category: "tile-stone",
     serviceSlug: "tile-stone",
     featured: true,
-    width: 800,
-    height: 600
+    width: 680,
+    height: 510
   },
   {
     id: 14,

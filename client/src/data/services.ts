@@ -4,19 +4,19 @@ export const servicesData: ServiceItemProps[] = [
   {
     title: "Hardwood Flooring",
     description: "Premium hardwood floor installation with a variety of wood species, finishes, and patterns to choose from.",
-    imageSrc: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    imageSrc: "https://lh3.googleusercontent.com/p/AF1QipP_pbTNVJ1CECiLfi6ZVqTcQdHmNGbimizdYW9M=s680-w680-h510",
     path: "/services/hardwood"
   },
   {
     title: "Luxury Vinyl Plank",
     description: "Durable, waterproof, and stylish luxury vinyl plank flooring that mimics natural wood or stone.",
-    imageSrc: "https://images.unsplash.com/photo-1571993142257-eae0b44cf0f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    imageSrc: "https://lh3.googleusercontent.com/p/AF1QipOOFhtKGkNRATODlPp8i1IFDFEY0CHlhBdqT3lJ=s680-w680-h510",
     path: "/services/vinyl-plank"
   },
   {
     title: "Tile & Stone",
     description: "Custom tile and stone flooring installation for kitchens, bathrooms, and other areas of your home.",
-    imageSrc: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    imageSrc: "https://lh3.googleusercontent.com/p/AF1QipNOuphZNPg9Gd5ykPucA-JEJt51XKQ8IAZgvChP=s680-w680-h510",
     path: "/services/tile-stone"
   },
   {

@@ -15,32 +15,25 @@ const HomePage = () => {
   // Slides for the hero section
   const heroSlides = [
     {
-      image: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80",
+      image: "https://lh3.googleusercontent.com/p/AF1QipP_pbTNVJ1CECiLfi6ZVqTcQdHmNGbimizdYW9M=s680-w680-h510",
       title: "Premium Hardwood Flooring",
       subtitle: "Timeless elegance and warmth that adds character and value to your home.",
       ctaLink: "/services/hardwood",
       type: "Hardwood"
     },
     {
-      image: "https://images.unsplash.com/photo-1594293115120-424642241445?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80",
+      image: "https://lh3.googleusercontent.com/p/AF1QipOOFhtKGkNRATODlPp8i1IFDFEY0CHlhBdqT3lJ=s680-w680-h510",
       title: "Luxury Vinyl Plank",
       subtitle: "Water-resistant, durable, and stunning replicas of natural materials.",
       ctaLink: "/services/vinyl-plank",
       type: "Vinyl"
     },
     {
-      image: "https://images.unsplash.com/photo-1609992556706-14a7056ea745?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80",
+      image: "https://lh3.googleusercontent.com/p/AF1QipNOuphZNPg9Gd5ykPucA-JEJt51XKQ8IAZgvChP=s680-w680-h510",
       title: "Porcelain & Ceramic Tile",
       subtitle: "Elegant, easy-to-maintain tile flooring for kitchens, bathrooms, and more.",
       ctaLink: "/services/tile-stone",
       type: "Tile"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1616142578948-5ec3fe4d26b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80",
-      title: "Floor Refinishing",
-      subtitle: "Restore the beauty of your existing hardwood floors with our expert refinishing service.",
-      ctaLink: "/services/refinishing",
-      type: "Refinishing"
     }
   ];
   

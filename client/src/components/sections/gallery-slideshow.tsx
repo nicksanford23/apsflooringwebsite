@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface GalleryImage {
@@ -26,117 +26,166 @@ interface GallerySlideshowProps {
 const GallerySlideshow = ({
   images = [],
   className,
-  title = "Our Latest Projects",
-  subtitle = "Browse through some of our recent work"
+  title = "Gallery",
+  subtitle = ""
 }: GallerySlideshowProps) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   
-  const nextSlide = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentSlide((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-    setTimeout(() => setIsTransitioning(false), 500);
-  }, [images.length, isTransitioning]);
-  
-  const prevSlide = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentSlide((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-    setTimeout(() => setIsTransitioning(false), 500);
-  }, [images.length, isTransitioning]);
-  
-  // Auto advance slides
+  // Check if mobile
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 4000);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
     
-    return () => clearInterval(interval);
-  }, [nextSlide]);
+    checkMobile(); // Initial check
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
   
   if (images.length === 0) return null;
   
+  // Only use first 6 images
+  const displayImages = images.slice(0, 6);
+  
+  // Navigation functions
+  const goToPrev = () => {
+    setCurrentIndex(prev => (prev === 0 ? displayImages.length - 1 : prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex(prev => (prev === displayImages.length - 1 ? 0 : prev + 1));
+  };
+
+  // Go to specific slide
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+  
   return (
-    <section className={cn("relative py-16 md:py-24 bg-accent overflow-hidden", className)} id="gallery-preview">
-      <div className="container-custom">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-secondary mb-4">{title}</h2>
-          <p className="text-lg text-secondary/70 max-w-3xl mx-auto mb-6">{subtitle}</p>
+    <section className={cn("py-20 md:py-28 bg-black", className)} id="gallery-preview">
+      <div className="container mx-auto px-4 md:px-8">
+        <div className="flex justify-between items-center mb-12">
+          <h2 className="text-3xl md:text-5xl font-bold text-white">{title}</h2>
           <Link href="/gallery">
-            <a className="text-primary hover:text-primary-dark font-medium transition-colors">
-              View Full Gallery
+            <a className="inline-flex items-center text-[#d4af37] hover:text-white text-lg font-medium transition-colors">
+              View All <ArrowRight className="ml-1" size={20} />
             </a>
           </Link>
         </div>
         
-        <div className="relative h-[400px] md:h-[500px] overflow-hidden rounded-sm">
-          {images.map((image, index) => (
-            <div 
-              key={index}
-              className={cn(
-                "absolute inset-0 w-full h-full transition-opacity duration-1000",
-                index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-              )}
-            >
-              <img 
-                src={image.src} 
-                alt={image.title} 
-                className="object-cover h-full w-full absolute inset-0"
-              />
-              
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <div className="flex justify-between items-end">
-                  <div>
-                    <span className="text-primary text-sm uppercase tracking-wider font-medium">{image.category}</span>
-                    <h3 className="text-white text-xl font-medium">{image.title}</h3>
+        {/* Mobile: Slideshow | Desktop: Grid */}
+        {isMobile ? (
+          <div className="relative">
+            {/* Gallery Navigation Arrows */}
+            <div className="flex justify-center space-x-4 mb-6">
+              <button 
+                onClick={goToPrev}
+                aria-label="Previous image"
+                className="bg-[#d4af37] text-black w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:bg-[#c4a030] focus:outline-none"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button 
+                onClick={goToNext}
+                aria-label="Next image"
+                className="bg-[#d4af37] text-black w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:bg-[#c4a030] focus:outline-none"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+
+            {/* Mobile Slideshow */}
+            <div className="overflow-hidden rounded-lg shadow-lg">
+              <div
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              >
+                {displayImages.map((image) => (
+                  <div
+                    key={image.id}
+                    className="w-full flex-shrink-0 flex-grow-0 relative h-80"
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt || image.title}
+                      className="object-cover w-full h-full"
+                    />
+                    
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-80"></div>
+                    
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <span className="text-[#d4af37] text-sm font-medium uppercase tracking-wider block mb-2">{image.category}</span>
+                      <h3 className="text-white text-xl font-bold mb-4">{image.title}</h3>
+                      
+                      {image.serviceSlug && (
+                        <Link href={`/services/${image.serviceSlug}`}>
+                          <a className="inline-block bg-[#d4af37] hover:bg-[#c4a030] text-black px-5 py-2 rounded-md text-sm font-bold shadow-lg">
+                            View {image.category}
+                          </a>
+                        </Link>
+                      )}
+                    </div>
                   </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Pagination dots */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {displayImages.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => goToSlide(idx)}
+                  className={cn(
+                    "w-2 h-2 rounded-full transition-all",
+                    currentIndex === idx ? "bg-[#d4af37] w-6" : "bg-white/30"
+                  )}
+                  aria-label={`Go to image ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          /* Desktop Grid Layout */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {displayImages.map((image) => (
+              <div 
+                key={image.id}
+                className="group relative h-64 md:h-80 overflow-hidden rounded-lg shadow-lg"
+              >
+                <img 
+                  src={image.src} 
+                  alt={image.alt || image.title} 
+                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                />
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-80 transition-opacity duration-300"></div>
+                
+                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 transform translate-y-2 transition-transform duration-300 group-hover:translate-y-0">
+                  <span className="text-[#d4af37] text-sm font-medium uppercase tracking-wider block mb-2">{image.category}</span>
+                  <h3 className="text-white text-xl font-bold mb-4">{image.title}</h3>
+                  
                   {image.serviceSlug && (
                     <Link href={`/services/${image.serviceSlug}`}>
-                      <a className="text-primary hover:text-white text-sm transition-colors">
-                        View Service
+                      <a className="inline-block bg-[#d4af37] hover:bg-[#c4a030] text-black px-5 py-2 rounded-md text-sm font-bold transition-all duration-300 shadow-lg">
+                        View {image.category}
                       </a>
                     </Link>
                   )}
                 </div>
               </div>
-            </div>
-          ))}
-          
-          {/* Navigation Controls */}
-          <div className="absolute inset-x-0 bottom-1/2 z-30 flex justify-between items-center px-4">
-            <button 
-              onClick={prevSlide}
-              className="w-10 h-10 rounded-full bg-black/25 hover:bg-primary/60 flex items-center justify-center text-white transition-colors duration-300"
-              aria-label="Previous slide"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button 
-              onClick={nextSlide}
-              className="w-10 h-10 rounded-full bg-black/25 hover:bg-primary/60 flex items-center justify-center text-white transition-colors duration-300"
-              aria-label="Next slide"
-            >
-              <ChevronRight size={24} />
-            </button>
+            ))}
           </div>
-        </div>
+        )}
         
-        {/* Minimal Slide Indicators */}
-        <div className="flex justify-center mt-6 space-x-2">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={cn(
-                "h-1.5 rounded-full transition-all duration-300",
-                currentSlide === index 
-                  ? "bg-primary w-8" 
-                  : "bg-secondary/30 hover:bg-secondary/50 w-4"
-              )}
-              aria-label={`Go to image ${index + 1}`}
-            />
-          ))}
+        {/* View All Button */}
+        <div className="mt-12 text-center">
+          <Link href="/gallery">
+            <a className="inline-block bg-[#d4af37] hover:bg-[#c4a030] text-black px-8 py-4 rounded-md font-bold transition-all duration-300 shadow-lg">
+              Browse All Projects
+            </a>
+          </Link>
         </div>
       </div>
     </section>

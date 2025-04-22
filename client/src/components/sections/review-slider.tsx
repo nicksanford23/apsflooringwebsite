@@ -1,214 +1,181 @@
-import { useState, useRef, useEffect } from "react";
-import { Link } from "wouter";
-import { ChevronLeft, ChevronRight, Star, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { cn, getStars } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { COMPANY_INFO } from "@/lib/constants";
 import type { Review } from "@shared/schema";
-
-interface ReviewCardProps {
-  name: string;
-  location: string;
-  rating: number;
-  text: string;
-}
-
-const ReviewCard = ({ name, location, rating, text }: ReviewCardProps) => {
-  const stars = getStars(rating);
-
-  return (
-    <div className="review-card">
-      <div className="text-primary mb-4">
-        {stars.map((filled, i) => (
-          <Star
-            key={i}
-            className={cn("inline-block", filled ? "fill-primary" : "")}
-            size={18}
-          />
-        ))}
-      </div>
-      <p className="text-secondary/70 mb-6">{text}</p>
-      <div className="flex items-center">
-        <div className="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4">
-          <div className="w-full h-full bg-primary/20 flex items-center justify-center">
-            <span className="text-primary/60 font-semibold">
-              {name.charAt(0)}
-            </span>
-          </div>
-        </div>
-        <div>
-          <h4 className="font-semibold">{name}</h4>
-          <p className="text-sm text-secondary/70">{location}</p>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 interface ReviewSliderProps {
   title?: string;
   subtitle?: string;
   className?: string;
-  limit?: number;
 }
 
 const ReviewSlider = ({
   title = "What Our Clients Say",
   subtitle = "Our customers' satisfaction is our greatest achievement.",
-  className,
-  limit = 3
+  className
 }: ReviewSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [slidesToShow, setSlidesToShow] = useState(3);
-  const sliderRef = useRef<HTMLDivElement>(null);
 
-  const { data: reviews, isLoading } = useQuery<Review[]>({
+  // Sample review data
+  const { data: reviews } = useQuery<Review[]>({
     queryKey: ["/api/reviews/featured"],
+    initialData: [
+      {
+        id: 1,
+        name: "Tammy N.",
+        location: "New Orleans, LA",
+        rating: 5,
+        text: "They did such a great job! They were very responsive and accommodating on start date. Came on time and were very quick and professional. Did an excellent job on both the tile and vinyl floor installations. Finished in 2 days.",
+        service: "tile-stone",
+        date: new Date("2023-12-15"),
+        featured: true
+      },
+      {
+        id: 2,
+        name: "Dylon B.",
+        location: "Chalmette, LA",
+        rating: 5,
+        text: "Completely blown away. These guys are the real deal. Completely tore down two bad shower tile jobs I got done last year, and gave us the showers we always wanted. Great communication, very skilled workers, and very quick but not rushed. I recommend this company to anyone wanting a great job done.",
+        service: "tile-stone",
+        date: new Date("2024-01-22"),
+        featured: true
+      },
+      {
+        id: 3,
+        name: "Michael R.",
+        location: "Metairie, LA",
+        rating: 5,
+        text: "I think we are all in the same boat when you want a contractor to be honest and timely, but we all want to get the best price. When you're trying to do remodeling or upgrades on a budget, it could turn out great or you could find yourself contacting the local news about a nightmare story. Pereira Flooring does good business and clearly is very competent and experienced.",
+        service: "hardwood",
+        date: new Date("2024-02-10"),
+        featured: true
+      }
+    ]
   });
 
-  // Responsive slides to show based on screen width
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setSlidesToShow(1);
-      } else if (window.innerWidth < 1024) {
-        setSlidesToShow(2);
-      } else {
-        setSlidesToShow(3);
-      }
-    };
-
-    handleResize(); // Set initial value
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+  // Navigation functions
   const goToPrev = () => {
-    setCurrentIndex(prev => 
-      prev === 0 ? (reviews?.length || 0) - slidesToShow : prev - 1
-    );
+    if (!reviews?.length) return;
+    setCurrentIndex(prev => (prev === 0 ? reviews.length - 1 : prev - 1));
   };
 
   const goToNext = () => {
-    setCurrentIndex(prev => 
-      prev === (reviews?.length || 0) - slidesToShow ? 0 : prev + 1
-    );
+    if (!reviews?.length) return;
+    setCurrentIndex(prev => (prev === reviews.length - 1 ? 0 : prev + 1));
   };
 
-  const goToPage = (index: number) => {
+  // Go to specific slide
+  const goToSlide = (index: number) => {
     setCurrentIndex(index);
   };
 
-  // Calculate total pages
-  const totalPages = reviews ? Math.ceil(reviews.length / slidesToShow) : 0;
-  const currentPage = Math.floor(currentIndex / slidesToShow);
+  if (!reviews?.length) return null;
 
   return (
-    <section className={cn("section-padding bg-gray-50", className)}>
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-secondary mb-4">{title}</h2>
+    <section className={cn("py-16 md:py-24 bg-black text-white", className)}>
+      <div className="container mx-auto px-4">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{title}</h2>
           <div className="flex items-center justify-center mb-4">
-            <div className="text-primary">
-              <Star className="inline-block fill-primary" size={18} />
-              <Star className="inline-block fill-primary" size={18} />
-              <Star className="inline-block fill-primary" size={18} />
-              <Star className="inline-block fill-primary" size={18} />
-              <Star className="inline-block fill-primary" size={18} />
-            </div>
-            <span className="ml-2 text-secondary">
-              {COMPANY_INFO.rating} Rating Based on {COMPANY_INFO.reviewCount} Reviews
-            </span>
-          </div>
-          <p className="text-lg text-secondary/70 max-w-3xl mx-auto">{subtitle}</p>
-        </div>
-        
-        {/* Slider Controls */}
-        <div className="relative" ref={sliderRef}>
-          <button 
-            className="absolute top-1/2 -left-4 -translate-y-1/2 z-10 bg-white w-10 h-10 rounded-full shadow-md flex items-center justify-center text-primary hover:text-white hover:bg-primary transition duration-200"
-            onClick={goToPrev}
-            aria-label="Previous review"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          
-          <button 
-            className="absolute top-1/2 -right-4 -translate-y-1/2 z-10 bg-white w-10 h-10 rounded-full shadow-md flex items-center justify-center text-primary hover:text-white hover:bg-primary transition duration-200"
-            onClick={goToNext}
-            aria-label="Next review"
-          >
-            <ChevronRight size={24} />
-          </button>
-          
-          {/* Slides Container */}
-          <div className="overflow-hidden">
-            <div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300"
-              style={{ 
-                transform: `translateX(-${currentIndex * (100 / slidesToShow)}%)`,
-                width: `${reviews?.length ? (reviews.length * 100) / slidesToShow : 100}%` 
-              }}
-            >
-              {isLoading ? (
-                // Loading state with skeleton cards
-                Array.from({ length: 3 }).map((_, index) => (
-                  <div key={index} className="review-card animate-pulse">
-                    <div className="h-4 bg-gray-200 rounded mb-4 w-1/3"></div>
-                    <div className="h-24 bg-gray-200 rounded mb-6"></div>
-                    <div className="flex items-center">
-                      <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                      <div>
-                        <div className="h-4 bg-gray-300 rounded w-24 mb-2"></div>
-                        <div className="h-3 bg-gray-200 rounded w-20"></div>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : reviews?.length ? (
-                reviews.map((review) => (
-                  <ReviewCard
-                    key={review.id}
-                    name={review.name}
-                    location={review.location}
-                    rating={review.rating}
-                    text={review.text}
-                  />
-                ))
-              ) : (
-                <div className="col-span-3 text-center p-8 bg-white rounded-sm shadow">
-                  <p>No reviews available at this time.</p>
-                </div>
-              )}
-            </div>
-          </div>
-          
-          {/* Slider Pagination */}
-          {reviews?.length > slidesToShow && (
-            <div className="flex justify-center mt-10 space-x-2">
-              {Array.from({ length: totalPages }).map((_, index) => (
-                <button
-                  key={index}
-                  className={cn(
-                    "w-3 h-3 rounded-full transition duration-200",
-                    currentPage === index ? "bg-primary" : "bg-gray-300 hover:bg-primary/50"
-                  )}
-                  onClick={() => goToPage(index * slidesToShow)}
-                  aria-label={`Go to page ${index + 1}`}
-                />
+            <div className="flex">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={20} className="text-[#d4af37] fill-[#d4af37] mx-0.5" />
               ))}
             </div>
-          )}
+            <span className="ml-2 text-white">
+              {COMPANY_INFO.rating} Rating
+            </span>
+          </div>
+          <p className="text-lg text-white/80 max-w-2xl mx-auto">{subtitle}</p>
         </div>
-        
-        {/* View All Link */}
+
+        {/* Review Navigation Controls - ABOVE the slider */}
+        <div className="flex justify-center mb-8 space-x-4">
+          <button 
+            onClick={goToPrev}
+            aria-label="Previous review"
+            className="bg-[#d4af37] text-black w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:bg-[#c4a030] focus:outline-none"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button 
+            onClick={goToNext}
+            aria-label="Next review"
+            className="bg-[#d4af37] text-black w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:bg-[#c4a030] focus:outline-none"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+
+        {/* Single Review Slider */}
+        <div className="max-w-2xl mx-auto relative">
+          {/* Slides container */}
+          <div className="overflow-hidden">
+            <div 
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {reviews.map((review) => (
+                <div 
+                  key={review.id} 
+                  className="w-full flex-shrink-0 flex-grow-0 bg-black/40 p-6 md:p-8 rounded-lg border border-[#d4af37]/20 shadow-lg"
+                >
+                  {/* Stars */}
+                  <div className="flex mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={16} className="text-[#d4af37] fill-[#d4af37] mr-1" />
+                    ))}
+                  </div>
+
+                  {/* Review text */}
+                  <p className="text-white mb-6 leading-relaxed text-base md:text-lg">
+                    "{review.text}"
+                  </p>
+
+                  {/* Customer info */}
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-[#d4af37] rounded-full flex items-center justify-center mr-3">
+                      <span className="text-black font-bold">{review.name.charAt(0)}</span>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white">{review.name}</h4>
+                      <p className="text-sm text-white/60">{review.location}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Pagination dots */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {reviews.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => goToSlide(idx)}
+                className={cn(
+                  "w-2 h-2 rounded-full transition-all",
+                  currentIndex === idx ? "bg-[#d4af37] w-6" : "bg-white/30"
+                )}
+                aria-label={`Go to review ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Google Reviews Link */}
         <div className="text-center mt-10">
-          <Link href="/reviews">
-            <a className="inline-flex items-center text-primary hover:text-secondary transition duration-200 font-medium text-lg">
-              Read All Reviews
-              <ArrowRight className="ml-2" size={18} />
-            </a>
-          </Link>
+          <a 
+            href="https://www.google.com/search?q=aps+flooring+reviews" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-[#d4af37] hover:bg-[#c4a030] text-black font-bold px-6 py-3 rounded-md transition duration-300"
+          >
+            Read More Reviews
+          </a>
         </div>
       </div>
     </section>

@@ -20,8 +20,8 @@ export const COMPANY_INFO = {
     saturday: "9:00 AM - 2:00 PM",
     sunday: "Closed"
   },
-  rating: "5.01",
-  reviewCount: "48",
+  rating: "5.0",
+  reviewCount: "24",
   social: {
     facebook: "https://facebook.com/apsflooring",
     instagram: "https://instagram.com/apsflooring",
@@ -36,8 +36,6 @@ export const MENU_ITEMS = [
   { name: "Home", path: "/" },
   { name: "Services", path: "/services" },
   { name: "Gallery", path: "/gallery" },
-  { name: "Reviews", path: "/reviews" },
-  { name: "Blog", path: "/blog" },
   { name: "Contact", path: "/contact" }
 ];
 
