@@ -55,8 +55,7 @@ const HomePage = () => {
       
       <HeroSection
         slides={heroSlides}
-        primaryCta={{ text: "Explore Services", href: "/services" }}
-        secondaryCta={{ text: "Get Free Quote", href: "/contact" }}
+        primaryCta={{ text: "Free Quote", href: "/contact" }}
       />
       
       <FeatureCards />
