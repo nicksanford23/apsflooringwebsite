@@ -1,0 +1,54 @@
+ITE MAP  (ALL PRE‑WIRED FOR SSG)
+──────────────────────────────────
+/                       – Home  
+/about                   – Our Story  
+/services                – Service index  
+/services/hardwood       – Hardwood Flooring  
+/services/vinyl-plank    – Luxury Vinyl Plank (LVP)  
+/services/tile-stone     – Tile & Stone  
+/services/refinishing    – Sanding & Refinishing  
+/gallery                 – Before / After gallery  
+/reviews                 – ⭐⭐⭐⭐⭐ Testimonials  
+/blog                    – MDX blog index  
+/blog/[slug]             – MDX article  
+/contact                 – Simple contact form (POST placeholder)  
+/404                     – Custom 404 (CTA back to /contact)
+
+──────────────────────────────────
+PAGE TEMPLATES & CONTENT BLOCKS
+──────────────────────────────────
+🏠  **Home**  
+   • HeroSection – full‑width video.webp fallback image + CTA.  
+   • FeatureCards (Craftsmanship | Speed | Warranty).  
+   • ServicesGrid (links to /services/*).  
+   • ReviewSlider – pulls 3 latest reviews.  
+   • “See Our Work” gallery teaser → /gallery.  
+   • SEO: <h1> Flooring Company in [City], Meta desc 150 chars, breadcrumb JSON‑LD.
+
+ℹ️  **About**  
+   • Company timeline, Leadership carousel (photos).  
+   • Mission / values accordion.  
+   • Schema: Organization + LocalBusiness JSON‑LD.
+
+🛠️ **Services index**  
+   • Card list w/ icon, 60‑word blurb, optimized <h2> tags.  
+   • FAQ accordion at bottom (FAQPage schema).
+
+🪵 **Service detail template** (e.g., /services/hardwood)  
+   • Hero image (src `/images/services/hardwood/hero.jpg`, alt “Finished white‑oak hardwood floor”).  
+   • Problem/Solution split‑section.  
+   • ProcessSteps (Measure → Install → Finish) with numbered icons.  
+   • BeforeAfterSlider (react‑before‑after‑slider) pulling `/images/services/hardwood/before.jpg` & `after.jpg`.  
+   • CTA Banner (“Ready for stunning hardwood? Get a free quote”).  
+   • Internal links: back to Services index, forward to Gallery.  
+   • Structured data: Service + FAQPage.
+
+🖼️ **Gallery**  
+   • Masonry layout (react‑photo‑gallery) reading images from `/images/gallery/**/*.jpg`.  
+   • Lightbox2 modal with captions and ‘View related service’ link (slug in image front‑matter).  
+   • Filter pills: All | Hardwood | Vinyl | Tile | Refinish (client‑only filter, no refetch).
+
+⭐ **Reviews**  
+   • Static list of 3rd‑party embeds (`/data/reviews.json`).  
+   • ReviewSlider, review cards with rel‑nofollow links.  
+   • Schema: Review.
