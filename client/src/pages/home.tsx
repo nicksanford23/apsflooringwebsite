@@ -3,12 +3,13 @@ import SEOHead from "@/components/shared/seo-head";
 import HeroSection from "@/components/sections/hero-section";
 import FeatureCards from "@/components/sections/feature-cards";
 import ServicesGrid from "@/components/sections/services-grid";
-import BeforeAfterSlider from "@/components/sections/before-after";
+import GallerySlideshow from "@/components/sections/gallery-slideshow";
 import ReviewSlider from "@/components/sections/review-slider";
 import CTASection from "@/components/sections/cta-section";
 import LocationSection from "@/components/sections/location-section";
 import { getLocalBusinessSchema } from "@/lib/seo";
 import { servicesData } from "@/data/services";
+import { galleryImages } from "@/data/gallery";
 
 const HomePage = () => {
   // Slides for the hero section
@@ -62,10 +63,7 @@ const HomePage = () => {
       
       <ServicesGrid services={servicesData} />
       
-      <BeforeAfterSlider 
-        beforeImage="https://images.unsplash.com/photo-1577099686204-19d51d7a166c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-        afterImage="https://images.unsplash.com/photo-1595428774223-ef52624120d2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-      />
+      <GallerySlideshow images={galleryImages.slice(0, 6)} />
       
       <ReviewSlider />
       

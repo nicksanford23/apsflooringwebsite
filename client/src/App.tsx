@@ -5,12 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "@/components/layout/layout";
 import HomePage from "@/pages/home";
-import AboutPage from "@/pages/about";
+import ServiceDetailPage from "@/pages/services/service-detail";
 import ServicesIndexPage from "@/pages/services/index";
-import HardwoodServicePage from "@/pages/services/hardwood";
-import VinylPlankServicePage from "@/pages/services/vinyl-plank";
-import TileStoneServicePage from "@/pages/services/tile-stone";
-import RefinishingServicePage from "@/pages/services/refinishing";
 import GalleryPage from "@/pages/gallery";
 import ReviewsPage from "@/pages/reviews";
 import BlogIndexPage from "@/pages/blog/index";
@@ -23,12 +19,12 @@ function Router() {
     <Layout>
       <Switch>
         <Route path="/" component={HomePage} />
-        <Route path="/about" component={AboutPage} />
         <Route path="/services" component={ServicesIndexPage} />
-        <Route path="/services/hardwood" component={HardwoodServicePage} />
-        <Route path="/services/vinyl-plank" component={VinylPlankServicePage} />
-        <Route path="/services/tile-stone" component={TileStoneServicePage} />
-        <Route path="/services/refinishing" component={RefinishingServicePage} />
+        <Route path="/services/hardwood" component={ServiceDetailPage} />
+        <Route path="/services/vinyl-plank" component={ServiceDetailPage} />
+        <Route path="/services/tile-stone" component={ServiceDetailPage} />
+        <Route path="/services/refinishing" component={ServiceDetailPage} />
+        <Route path="/services/:slug" component={ServiceDetailPage} />
         <Route path="/gallery" component={GalleryPage} />
         <Route path="/reviews" component={ReviewsPage} />
         <Route path="/blog" component={BlogIndexPage} />

@@ -34,7 +34,6 @@ export const COMPANY_INFO = {
 
 export const MENU_ITEMS = [
   { name: "Home", path: "/" },
-  { name: "Our Story", path: "/about" },
   { name: "Services", path: "/services" },
   { name: "Gallery", path: "/gallery" },
   { name: "Reviews", path: "/reviews" },

@@ -79,18 +79,18 @@ const HeroSection = ({
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
             
             {/* Simple Content */}
-            <div className="absolute bottom-0 left-0 p-8 md:p-16 z-20 w-full">
+            <div className="absolute bottom-0 left-0 p-8 md:p-16 pb-20 md:pb-24 z-20 w-full">
               <div className="max-w-5xl mx-auto">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-4">{slide.title}</h2>
-                <p className="text-lg text-white/90 mb-8 max-w-2xl">{slide.subtitle}</p>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-3 md:mb-4">{slide.title}</h2>
+                <p className="text-base sm:text-lg text-white/90 mb-6 md:mb-8 max-w-2xl">{slide.subtitle}</p>
                 
-                <div className="flex flex-col sm:flex-row gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
                   <Link href={slide.ctaLink}>
-                    <a className="btn-primary text-base px-8 py-3">View {slide.type} Flooring</a>
+                    <a className="btn-primary text-center text-base sm:text-lg px-6 sm:px-8 py-4 w-full">View {slide.type}</a>
                   </Link>
                   
                   <Link href={primaryCta.href}>
-                    <a className="btn-secondary text-base px-8 py-3">{primaryCta.text}</a>
+                    <a className="btn-secondary text-center text-base sm:text-lg px-6 sm:px-8 py-4 w-full">{primaryCta.text}</a>
                   </Link>
                 </div>
               </div>
@@ -100,34 +100,34 @@ const HeroSection = ({
       </div>
       
       {/* Simple Navigation Controls */}
-      <div className="absolute inset-x-0 bottom-1/2 z-30 flex justify-between items-center px-6">
+      <div className="hidden md:flex absolute inset-x-0 bottom-1/2 z-30 justify-between items-center px-8">
         <button 
           onClick={prevSlide}
-          className="w-12 h-12 rounded-full bg-black/30 hover:bg-primary/80 flex items-center justify-center text-white"
+          className="w-10 h-10 rounded-full bg-black/25 hover:bg-primary/60 flex items-center justify-center text-white transition-colors duration-300"
           aria-label="Previous slide"
         >
-          <ChevronLeft size={28} />
+          <ChevronLeft size={24} />
         </button>
         <button 
           onClick={nextSlide}
-          className="w-12 h-12 rounded-full bg-black/30 hover:bg-primary/80 flex items-center justify-center text-white"
+          className="w-10 h-10 rounded-full bg-black/25 hover:bg-primary/60 flex items-center justify-center text-white transition-colors duration-300"
           aria-label="Next slide"
         >
-          <ChevronRight size={28} />
+          <ChevronRight size={24} />
         </button>
       </div>
       
       {/* Minimal Slide Indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex space-x-3">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex space-x-2">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
             className={cn(
-              "w-2 h-2 rounded-full transition-all",
+              "h-1.5 rounded-full transition-all duration-300",
               currentSlide === index 
                 ? "bg-primary w-8" 
-                : "bg-white/60 hover:bg-white"
+                : "bg-white/40 hover:bg-white/70 w-4"
             )}
             aria-label={`Go to slide ${index + 1}`}
           />
