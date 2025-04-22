@@ -11,7 +11,8 @@ import { getLocalBusinessSchema } from "@/lib/seo";
 import { servicesData } from "@/data/services";
 
 const HomePage = () => {
-  const heroImage = "https://images.unsplash.com/photo-1633116536735-0a99af6922ed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80";
+  // High-quality image of a luxury wood floor with natural light
+  const heroImage = "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80";
   
   return (
     <>
